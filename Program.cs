@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class Process
 {
     public int ProcessId { get; private set; }
-    public int NumberOfTickets { get; set; } // Make set accessor public
+    public int NumberOfTickets { get; set; } 
 
     public Process(int processId, int numberOfTickets)
     {
@@ -34,7 +34,7 @@ public class Scheduler
         readyQueue.Enqueue(new Process(processId, numberOfTickets));
     }
 
-    public void RunRoundRobin()
+    public void RoundRobin()
     {
         while (readyQueue.Count > 0)
         {
@@ -45,7 +45,7 @@ public class Scheduler
 
             if (currentProcess.NumberOfTickets > 0)
             {
-                readyQueue.Enqueue(currentProcess); // Add back to the queue if tickets remaining
+                readyQueue.Enqueue(currentProcess); // add back to the queue if tickets remaining
             }
             else
             {
@@ -59,14 +59,14 @@ class Program
 {
     static void Main(string[] args)
     {
-        Scheduler scheduler = new Scheduler(2); // Time quantum is set to 2
+        Scheduler scheduler = new Scheduler(2); // time quantum is set to 2
 
-        // Adding processes with different numbers of tickets
+        // adding processes with different numbers of tickets
         scheduler.AddProcess(1, 5);
         scheduler.AddProcess(2, 3);
         scheduler.AddProcess(3, 10);
 
-        // Run Round Robin scheduling
-        scheduler.RunRoundRobin();
+       
+        scheduler.RoundRobin();
     }
 }
